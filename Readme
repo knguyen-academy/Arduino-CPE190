@@ -1,0 +1,2 @@
+For CPE190 project.
+Arduino code to collect data from Pressure sensors and send it to Pi via Bluetooth connection.
