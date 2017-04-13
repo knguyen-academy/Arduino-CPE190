@@ -1,12 +1,14 @@
 //Created by: Khoi Nguyen
 //Revised: 04-13-2017
+
 #include <SD.h>
 #include <SPI.h>
 #include <Wire.h>
+#include <SoftwareSerial.h>
 #define signalPin 5
 #define collectLed 8
 #define sendLed 13
-#include <SoftwareSerial.h>
+#define FILE_NO 7
 #define rxPin 0
 #define txPin 1
 SoftwareSerial BTSetup (rxPin, txPin);
@@ -16,7 +18,7 @@ SoftwareSerial BTSetup (rxPin, txPin);
 ///SD card varibles///
 int time_index=0;
 int signalState=0;  //use to signal Sending State
-File fp[7];     // Create 7 files in SD
+File fp[FILE_NO];     // Create 7 files in SD
 char filename[10];  // dynamic files name
 
 ///Gyrop variables///
@@ -34,7 +36,7 @@ void setup()
     BTSetup.begin(115200);
     
     //Create 8 new file on Set up, otherwise it will be halted !!!
-    for (int i = 0; i <7; i++)
+    for (int i = 0; i <FILE_NO; i++)
   {
     sprintf(filename, "test%d.txt", i);
     fp[i] = SD.open(filename,O_CREAT);
@@ -74,7 +76,7 @@ void loop()
   //////////////////////*****COLLECT STATE****** ///////////////
   
      // open the file for write.
-    for (int i = 0; i <7; i++)
+    for (int i = 0; i <FILE_NO; i++)
   {
     sprintf(filename, "test%d.txt", i);
     fp[i] = SD.open(filename,FILE_WRITE);
@@ -142,7 +144,7 @@ void loop()
   
     digitalWrite(collectLed, LOW);
     // Open each file and print to terminal/Bluetooth
-    for (int i = 0; i <7; i++)
+    for (int i = 0; i <FILE_NO; i++)
       {
         int d=i+1;
         sprintf(filename, "test%d.txt", i);
@@ -160,7 +162,7 @@ void loop()
     BTSetup.println("Done");
 
     //Remove files after read
-    for (int i = 0; i <7; i++)
+    for (int i = 0; i <FILE_NO; i++)
       {
         sprintf(filename, "test%d.txt", i);
         SD.remove(filename);
@@ -241,7 +243,7 @@ void processGyroData() {
 
 void closeFile()
 {
-  for(int i =0; i<7; i++)
+  for(int i =0; i<FILE_NO; i++)
   fp[i].close();
  
 }
