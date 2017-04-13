@@ -8,7 +8,7 @@
 #define signalPin 5
 #define collectLed 8
 #define sendLed 13
-#define FILE_NO 7
+#define FILE_NO 2
 #define rxPin 0
 #define txPin 1
 SoftwareSerial BTSetup (rxPin, txPin);
@@ -94,7 +94,8 @@ void loop()
       dtostrf(voltage[i], 4, 5, str_voltage);    //convert float voltage to string
       //sprintf(buff,"%d , %s\n",time_index, intVoltage[i]);  //format string to buff, to print to file
       //fp[i].print(buff);              //Write to file in SD
-      fp[i].print(time_index); fp[i].print(", "); fp[i].print(str_voltage); fp[i].print("\n");
+	  fp[0].print("File1"); fp[0].print(", ");
+      fp[0].print(time_index); fp[0].print(", "); fp[0].print(str_voltage); fp[0].print("\n");
     }//end for
     
     time_index++;
@@ -110,14 +111,13 @@ void loop()
   //fp[4].print("\n");
   
   //Read Accel and print to File5
-    recordAccelRegisters();
-    //fp[4].print("X=");    
-  fp[6].print(gForceX); fp[6].print(", ");
-    //fp[5].print(" Y=");   
-  fp[6].print(gForceY);fp[6].print(", ");
-    //fp[5].print(" Z=");   
-  fp[6].print(gForceZ);
-    fp[6].print("\n");
+  recordAccelRegisters();
+
+  fp[1].print("File2"); fp[1].print(", ");
+  fp[1].print(gForceX); fp[1].print(", ");
+  fp[1].print(gForceY);fp[1].print(", ");
+  fp[1].print(gForceZ);
+  fp[1].print("\n");
     
   
     // Close all files every write
