@@ -84,7 +84,7 @@ void loop()
 
   
   // if the files opened okay, write to it:
-  if (fp[0] && fp[1] && fp[2] && fp[3] &&fp[4] && fp[5] &&fp[6]) 
+  if (fp[0] && fp[1] ) 
   {
     //Read data from 4 analogs Pin A1-A4
     for (int i = 0; i < 6; i++)
