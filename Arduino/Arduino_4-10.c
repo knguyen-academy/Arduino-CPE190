@@ -131,7 +131,7 @@ void loop()
     Serial.println("error opening test.txt");
   }
   
-  delay(100);
+  //delay(100);
   
   //////////////////////*****SENDING STATE****** ///////////////
   signalState = digitalRead(signalPin);
@@ -140,7 +140,7 @@ void loop()
     //closeFile();
     digitalWrite(collectLed, HIGH);
     digitalWrite(sendLed, HIGH);
-    //delay(550); //use this for sync with the Pi (restart)
+    delay(55000); //use this for sync with the Pi (restart)
   
     digitalWrite(collectLed, LOW);
     // Open each file and print to terminal/Bluetooth
@@ -160,7 +160,8 @@ void loop()
       }
       
     BTSetup.println("Done");
-
+    BTSetup.println("Done");
+    BTSetup.println("Done");BTSetup.println("Done");
     //Remove files after read
     for (int i = 0; i <FILE_NO; i++)
       {
