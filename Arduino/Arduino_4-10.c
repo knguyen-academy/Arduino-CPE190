@@ -94,7 +94,7 @@ void loop()
       dtostrf(voltage[i], 4, 5, str_voltage);    //convert float voltage to string
       //sprintf(buff,"%d , %s\n",time_index, intVoltage[i]);  //format string to buff, to print to file
       //fp[i].print(buff);              //Write to file in SD
-	  fp[0].print("File1"); fp[0].print(", ");
+    fp[0].print("File");fp[0].print(i); fp[0].print(", ");
       fp[0].print(time_index); fp[0].print(", "); fp[0].print(str_voltage); fp[0].print("\n");
     }//end for
     
@@ -113,7 +113,7 @@ void loop()
   //Read Accel and print to File5
   recordAccelRegisters();
 
-  fp[1].print("File2"); fp[1].print(", ");
+  fp[1].print("File6"); fp[1].print(", ");
   fp[1].print(gForceX); fp[1].print(", ");
   fp[1].print(gForceY);fp[1].print(", ");
   fp[1].print(gForceZ);
@@ -122,7 +122,7 @@ void loop()
   
     // Close all files every write
     closeFile();
-    //delay(100);
+    //delay(1000);
    
   } 
   else 
@@ -131,7 +131,7 @@ void loop()
     Serial.println("error opening test.txt");
   }
   
-  //delay(100);
+  delay(100);
   
   //////////////////////*****SENDING STATE****** ///////////////
   signalState = digitalRead(signalPin);
@@ -140,7 +140,7 @@ void loop()
     //closeFile();
     digitalWrite(collectLed, HIGH);
     digitalWrite(sendLed, HIGH);
-    //delay(55000); //use this for sync with the Pi (restart)
+    //delay(550); //use this for sync with the Pi (restart)
   
     digitalWrite(collectLed, LOW);
     // Open each file and print to terminal/Bluetooth
@@ -149,9 +149,9 @@ void loop()
         int d=i+1;
         sprintf(filename, "test%d.txt", i);
         fp[i] = SD.open(filename,FILE_READ);
-        sprintf(filename, "file%d",d);
-        BTSetup.print(filename);
-        BTSetup.print("\n");
+        //sprintf(filename, "file%d",d);
+        //BTSetup.print(filename);
+        //BTSetup.print("\n");
         while (fp[i].available()) 
         {
           BTSetup.write(fp[i].read());
