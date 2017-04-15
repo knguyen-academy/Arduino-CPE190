@@ -1,3 +1,5 @@
+//Created by Khoi Nguyen
+//Date : 03-10-2017
 #include <stdio.h>
 #include "simpletools.h" // Include simple tools
 #include "fdserial.h"
