@@ -1,0 +1,17 @@
+Testing Info
+
+1 min
+	~2.48KB/s Data collected
+	148.9KB Total
+		119KB Test0.txt
+		29.6KB Test1.txt
+	1219 samples/sensor
+		~20.3 samples/sec/sensor
+	7314 samples total
+		~121.9 samples/sec total
+
+	estimated 
+		8.934 MB/hr
+		17.868 MB/2hr
+5 min
+	
