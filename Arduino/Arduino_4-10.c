@@ -189,6 +189,7 @@ void loop()
         }
       }
     
+	fileIndex = 0;
     time_index = 0; //reset time_index
     //delay(2000);
 
