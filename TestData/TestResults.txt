@@ -1,0 +1,56 @@
+Testing Info
+
+1 min
+	~2.482KB/s Data collected
+	148.9KB Total
+		119KB Test0.txt
+		29.6KB Test1.txt
+	1219 samples/sensor
+		~20.3 samples/sec/sensor
+	7314 samples total
+		~121.9 samples/sec total
+
+	estimated 
+		8.934 MB/hr
+		17.868 MB/2hr
+		
+10 min
+	~2.067 KB/s Data Collected
+	1.234 MB Total
+		0.99 MB Test0.txt
+		244 KB Test1.txt
+	10032 samples/sensor
+		~16.72 samples/sec/sensor
+	60192 samples total
+		~100.32 samples/sec total
+	
+	estimated
+		7.404 MB/hr
+		14.808 MB/2hr
+		
+2hr
+	~1.047 KB/s Data Collected
+	7.54 MB Total
+		6.15 MB Test0.txt 
+		1.38 MB Test1.txt
+	58174 samples/sensor
+		~8.08 samples/sec/sensor
+	349044 samples total
+		~48.48 samples/sec total
+		
+30 sec 
+	~2.507 KB/s
+	75.2 KB Total
+	3726 samples total
+	
+20 min
+	~1.8 KB/s 
+	2.16 MB Total
+	103296 samples total
+		
+		
+(x10) -> 80%   of what expected
+(x12) -> 50.1%
+(x120)-> 42.1% 
+(x2)  -> 99.0028%s		
+	
