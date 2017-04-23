@@ -47,10 +47,10 @@ Testing Info
 	~1.8 KB/s 
 	2.16 MB Total
 	103296 samples total
-		
-		
-(x10) -> 80%   of what expected
-(x12) -> 50.1%
-(x120)-> 42.1% 
-(x2)  -> 99.0028%s		
 	
+7.5 min
+	~2.21 KB/s
+	995 KB
+	
+Approx. Equation:
+Average Data Rate(KB/s) = 1.02 + 1.4833e^(-0.034x)

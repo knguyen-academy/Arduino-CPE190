@@ -73,7 +73,7 @@ void loop()
   digitalWrite(sendLed, LOW);
   
   
-  //////////////////////*****COLLECT STATE****** ///////////////
+  //////////////////////*****COLLECT STATE****** /////////////// 
   
      // open the file for write.
     for (int i = 0; i <FILE_NO; i++)
