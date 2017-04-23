@@ -21,6 +21,8 @@ int signalState=0;  //use to signal Sending State
 File fp[FILE_NO];     // Create 7 files in SD
 char filename[10];  // dynamic files name
 
+int fileIndex = 0; //increment and open new file once the file is too large
+
 ///Gyrop variables///
 long accelX, accelY, accelZ; // Accel register values 
 float gForceX, gForceY, gForceZ; // Accel in gforces 
@@ -38,7 +40,7 @@ void setup()
     //Create 8 new file on Set up, otherwise it will be halted !!!
     for (int i = 0; i <FILE_NO; i++)
   {
-    sprintf(filename, "test%d.txt", i);
+    sprintf(filename, "test%d_%d.txt", i, fileIndex);
     fp[i] = SD.open(filename,O_CREAT);
   }
   
@@ -78,7 +80,7 @@ void loop()
      // open the file for write.
     for (int i = 0; i <FILE_NO; i++)
   {
-    sprintf(filename, "test%d.txt", i);
+    sprintf(filename, "test%d_%d.txt", i, fileIndex);
     fp[i] = SD.open(filename,FILE_WRITE);
   }
 
@@ -121,6 +123,18 @@ void loop()
     
   
     // Close all files every write
+    if(fp[0].size() > 65536)
+    {
+      fileIndex++;
+      closeFile();
+      for (int i = 0; i <FILE_NO; i++)
+      {
+        sprintf(filename, "test%d_%d.txt", i, fileIndex);
+        Serial.print("File exceeded max size, opening new file: ");
+        Serial.println(filename);
+        fp[i] = SD.open(filename,O_CREAT);
+      }
+    }
     closeFile();
     //delay(1000);
    
@@ -146,17 +160,20 @@ void loop()
     // Open each file and print to terminal/Bluetooth
     for (int i = 0; i <FILE_NO; i++)
       {
-        int d=i+1;
-        sprintf(filename, "test%d.txt", i);
-        fp[i] = SD.open(filename,FILE_READ);
-        //sprintf(filename, "file%d",d);
-        //BTSetup.print(filename);
-        //BTSetup.print("\n");
-        while (fp[i].available()) 
+        for(int j = 0; j <= fileIndex ; j++)
         {
-          BTSetup.write(fp[i].read());
+          int d=i+1;
+          sprintf(filename, "test%d_%d.txt", i, j);
+          fp[i] = SD.open(filename,FILE_READ);
+          //sprintf(filename, "file%d",d);
+          //BTSetup.print(filename);
+          //BTSetup.print("\n");
+          while (fp[i].available()) 
+          {
+            BTSetup.write(fp[i].read());
+          }
+          fp[i].close();
         }
-        fp[i].close();
       }
       
     BTSetup.println("Done");
@@ -165,8 +182,11 @@ void loop()
     //Remove files after read
     for (int i = 0; i <FILE_NO; i++)
       {
-        sprintf(filename, "test%d.txt", i);
-        SD.remove(filename);
+        for(int j = 0; j <=fileIndex; j++)
+        {
+          sprintf(filename, "test%d_%d.txt", i, j);
+          SD.remove(filename);
+        }
       }
     
     time_index = 0; //reset time_index
